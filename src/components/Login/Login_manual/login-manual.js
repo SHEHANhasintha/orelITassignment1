@@ -32,7 +32,7 @@ const submitCredentials = (e) => {
     
     if ((login.trim() === 'name') && (password.trim() === 'pass')){
       console.log("good")
-      window.location = "./app"
+      window.location = "./ap"
     }
 
     //console.log(thita,process.env.REACT_APP_APPLICATION_PROXY+ "/auth/local");
