@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header from './components/Header/header.js'
 import Login from './components/Login/login.js'
 import Ap from './app/app.js'
 import './App.css';
@@ -15,8 +14,8 @@ class App extends Component {
 
             <BrowserRouter>
                       <Switch>
-                          <Route path="/app" exact  name="Home" render={props => <Login {...props}/>}/>
-                          <Route path="/ap" exact  name="Home" render={props => <Ap {...props}/>} />
+                          <Route path="/" exact  name="Home" render={props => <Login {...props}/>}/>
+                          <Route path="/app" exact  name="Home" render={props => <Ap {...props}/>} />
                       </Switch>
               </BrowserRouter>
 

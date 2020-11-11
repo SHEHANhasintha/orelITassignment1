@@ -24,6 +24,7 @@ const handleNameChangeField = (e) => {
 }
 
 
+
 const submitCredentials = (e) => {
   e.preventDefault();
   //callback function would be to call toggleAuth
@@ -32,7 +33,7 @@ const submitCredentials = (e) => {
     
     if ((login.trim() === 'name') && (password.trim() === 'pass')){
       console.log("good")
-      window.location = "./ap"
+      window.location = "./app"
     }
 
     //console.log(thita,process.env.REACT_APP_APPLICATION_PROXY+ "/auth/local");
