@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LoginManual from './Login_manual/login-manual.js';
+import MainCarry from '../../app/MainCarry'
 
 class Login extends Component {
   render() {
