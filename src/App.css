@@ -100,7 +100,6 @@ html {
 }
 .big-bg
 {
-  /*background: url('https://upload.wikimedia.org/wikipedia/commons/8/8d/Perchtoldsdorf_Pfarrkirche_Innenraum_01.jpg');*/
   background-size: cover;
   height: calc(100vh);
   display: flex;

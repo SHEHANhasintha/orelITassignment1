@@ -5,9 +5,7 @@ let password = ''
 
 const handleChangeEmailField = (e) => {
   e.preventDefault();
-  //console.log(e.target.value.trim())
   password = e.target.value.trim()
-  console.log(password)
   return(new Promise(async(resolve,reject) => {
     await resolve(e.target.value.trim());
   }))  
@@ -15,9 +13,7 @@ const handleChangeEmailField = (e) => {
 
 const handleNameChangeField = (e) => {
   e.preventDefault();
-  //console.log(e.target.value.trim())
   login = e.target.value.trim()
-  console.log(login)
   return(new Promise(async(resolve,reject) => {
     await resolve(e.target.value.trim());
   }))  
@@ -25,34 +21,21 @@ const handleNameChangeField = (e) => {
 
 
 
-const submitCredentials = (e) => {
+const submitCredentials = (e,props) => {
   e.preventDefault();
   //callback function would be to call toggleAuth
   return(new Promise(async(resolve,reject) => {
-    console.log(e.target.value.trim());
-    
     if ((login.trim() === 'name') && (password.trim() === 'pass')){
-      console.log("good")
-      window.location = "./app"
+      props.props.history.push('/app')
     }
 
-    //console.log(thita,process.env.REACT_APP_APPLICATION_PROXY+ "/auth/local");
-    /*axios
-      .post("/auth/local",thita)
-      .then((res) => {
-        console.log(res);
-        if (res.status == 200){
-          cb(true)
-          //window.location = "./app"*/
-          
-       /* }
-      })
-      .catch((err) => console.log(err))*/
-    //await resolve(cb());
   }))
 }
 
 class LoginManual extends Component {
+
+  componentDidMount(){
+  }
 
   render() {
     return (
@@ -66,7 +49,7 @@ class LoginManual extends Component {
           <div className='form-group'>
             <input type="password" onChange={(e) => handleChangeEmailField(e)} className='form-control' placeholder='Password'/>
           </div>
-          <button type="submit" onClick={(e) => submitCredentials(e)} className='btn btn-primary right-btn'>Log in</button>
+          <button type="submit" onClick={(e) => submitCredentials(e,this.props)} className='btn btn-primary right-btn'>Log in</button>
         </form>
       </div>
     );
