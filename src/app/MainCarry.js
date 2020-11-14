@@ -7,7 +7,8 @@ import ClosestCountries from './ClosestCountries';
 import SearchCountry from './SearchCountry';
 import BetweenTimeZones from './TimeZones';
 
-
+import { Provider } from '../../node_modules/react-redux';
+import store from "../storage";
 
 class MainCarry extends Component {
 
@@ -20,6 +21,8 @@ class MainCarry extends Component {
               hasMounted: 'distanceApp'
         };
       }
+
+
 
     componentDidMount() {
     }
@@ -52,6 +55,7 @@ class MainCarry extends Component {
   render() {
 
     return (
+        <Provider store={store}>
         <React.StrictMode>
       <div className='container-fluid big-bg'>
             <div className='container-fluid big-bg heightArrange'>
@@ -66,6 +70,7 @@ class MainCarry extends Component {
 
       </div>
       </React.StrictMode>
+      </Provider>
     );
   }
 }

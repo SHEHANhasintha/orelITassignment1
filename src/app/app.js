@@ -2,8 +2,12 @@
 
 import React, { Component} from '../../node_modules/react';
 import axios from '../../node_modules/axios'
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-const getFetched = () => {
+import { requestApiData, locationData }  from  "../actions"
+
+/*const getFetched = () => {
   return(new Promise(async(resolve,reject) => {
     axios.get('https://restcountries.eu/rest/v2/all')
     .then((res) => {
@@ -16,13 +20,13 @@ const getFetched = () => {
 
   }))
 
-}
+}*/
 
 const getLocations = (reqData) => {
     return(new Promise(async(resolve,reject) => {
 
       let positionData;
-
+      console.log(reqData)
       positionData = reqData.map((data) => {
         let c = [data.latlng,data.cioc]
         return c
@@ -38,12 +42,15 @@ class App extends Component {
 
       constructor(props) {
         super(props);
+        this.props.requestApiData()
+        //console.log()
         this.state = {
               fullDataResponce: [],
               locations: [],
               country1Input: '',
               country2Input: '',
-              distanceBetween: 'From where to where?'
+              distanceBetween: 'From where to where?',
+              newGuy: []
         };
       }
 
@@ -58,6 +65,8 @@ class App extends Component {
 
     distanceCalculator = (e) => {
       e.preventDefault()
+      
+     console.log(this.state.locations,"i dont know any more")
 
       let lat1,lon1,lat2,lon2 = '';
       this.state.locations.map((data) => {
@@ -98,11 +107,31 @@ class App extends Component {
 
   
 
-
+    setupData(data) {
+      if (data.length > 0) {
+        console.log(data,"what the")
+        //this.setState({ fullDataResponce : data })
+        this.state.fullDataResponce = data;
+        getLocations(data).then((fetchedData) => {
+          this.state.locations = fetchedData
+          this.props.dataResponceHandle(data)
+        })
+        
+        return(
+             <h1> Loaded.. </h1>
+        )
+      }else{
+        console.log(data,"hhhhhh")
+        return(
+          <h1>Loading...</h1>
+        )
+      }
+      
+    }
 
 
     componentDidMount() {
-        getFetched('https://restcountries.eu/rest/v2/all')
+        /*getFetched('https://restcountries.eu/rest/v2/all')
         .then((res) => {
           this.setState({fullDataResponce : res})
         }).then(() => {
@@ -113,16 +142,40 @@ class App extends Component {
             this.setState({'locations' : fetchedData})
           })
 
-        })
+        })*/
+        
+
+       /*this.setState({ fullDataResponce : this.props.data })
+       this.props.dataResponceHandle(this.props.data)
+        console.log(this.props,"kpop")
+       getLocations(this.props.data).then((fetchedData) => {
+        this.setState({'locations' : fetchedData})
+        
+      })*/
+      //this.props.locationData()
+
+      //this.setupData(this.props.data)
+      // this.setState({ 'locations' : fullDataResponce })
+        
         
     }
 
   render() {
+    console.log(this.props,"kpopjhhj")
+    //this.setupData(this.props.data)
+
+
+    
+    //const { results = [] } = this.props.data;
     return (
       <div className='container-fluid big-bg heightArrangeDistanceCal'>
 
-        <h1 className="badgeDistance">{this.state.distanceBetween}</h1>
+        {/*this.setupData(this.props.data)*/}
 
+        {this.setupData(this.props.data)}        
+
+        <h1 className="badgeDistance">{this.state.distanceBetween}</h1>
+        
         <form onSubmit={(e) => this.distanceCalculator(e)} >
           <div className="form-group">
             <label htmlFor="country1">Country 1</label>
@@ -142,5 +195,26 @@ class App extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({ 
+  data : state.data,
+  locationData : state.data,
+});
+
+const mapDispatchToProps = disatch => 
+  bindActionCreators({  locationData: locationData,
+    requestApiData: requestApiData, }, disatch)
+
+
+/*const mapDispatchToProps = {
+  locationData: locationData,
+  requestApiData: requestApiData,
+};*/
+
+App = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
+
 
 export default App;

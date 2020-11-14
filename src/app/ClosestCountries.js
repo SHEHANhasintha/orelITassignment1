@@ -41,6 +41,7 @@ class ClosestCountries extends Component {
         this.setState({countryInput : e.target.value})
     }
 
+
     componentDidMount() {
         let closeData = this.props.fullDataResponce.map((data) => {
             let c = [data.borders,data.name]
@@ -67,7 +68,6 @@ class ClosestCountries extends Component {
   render() {
     return (
       <div className='container-fluid big-bg heightArrangeDistanceCal'>
-
         <h1 className="badgeDistance">what to know your Closest Countries?</h1>
 
         <form onSubmit={(e) => this.closeCountries(e)} >
